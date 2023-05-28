@@ -440,7 +440,7 @@ class RSPMNInitialTemplate:
                     self.two_time_step_params.utility_nodes_two_time_steps,
                     self.two_time_step_params.feature_names_two_time_steps,
                     self.two_time_step_params.meta_types_two_time_steps,
-                    cluster_by_curr_information_set=True,
+                    cluster_by_curr_information_set=False,
                     util_to_bin=False)
 
         spmn_structure_two_time_steps = spmn.learn_spmn(data)

@@ -269,7 +269,8 @@ class SPMN:
                     # cluster on whole remaining variables
                     ds_context_sum = get_ds_context(remaining_vars_data, remaining_vars_scope, self.params)
                     data_slices_sum, km_model = split_rows(remaining_vars_data, ds_context_sum, remaining_vars_scope)
-
+                    if len(data_slices_sum)<2:
+                        print('Only one slice made')
                     logging.info(f'split clusters based on whole remaining variables {remaining_vars_scope}')
 
                 sum_node_children = []
