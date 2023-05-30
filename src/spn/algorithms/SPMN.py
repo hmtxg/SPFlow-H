@@ -262,6 +262,25 @@ class SPMN:
                     ds_context_sum = get_ds_context(curr_information_set_data, curr_information_set_scope, self.params)
                     data_slices_sum, km_model = split_rows(curr_information_set_data, ds_context_sum,
                                                            curr_information_set_scope)
+                    if len(data_slices_sum)<2:
+                        print('Only one slice made')
+                        if all(x == data_slices_sum[0] for x in data_slices_sum): #THIS IS A WRONG CHECK
+                            print('Identical data in slice, naively clustering')
+                            datalength = len(data_slices_sum[0][0])
+                            half_length, remainder = divmod(datalength, 2)
+                            var_ind = data_slices_sum[0][1]
+                            first_half = data_slices_sum[0][0][:half_length + remainder]
+                            second_half = data_slices_sum[0][0][half_length + remainder:]
+                            data_slices_sum[0] = list(data_slices_sum[0])
+                            data_slices_sum[0][0] = list(data_slices_sum[0][0])
+                            data_slices_sum[0][0] = first_half
+                            data_slices_sum[0][2] = 0.5
+                            part2 = [second_half, var_ind, 0.5]
+                            data_slices_sum.append(part2)
+                            data_slices_sum[0] = tuple(data_slices_sum[0])
+                            data_slices_sum[1] = tuple(data_slices_sum[1])
+                            for i in range(len(first_half)):
+                                km_model.labels_[i] = 1
 
                     logging.info(f'split clusters based on current information set {curr_information_set_scope}')
 
@@ -271,6 +290,8 @@ class SPMN:
                     data_slices_sum, km_model = split_rows(remaining_vars_data, ds_context_sum, remaining_vars_scope)
                     if len(data_slices_sum)<2:
                         print('Only one slice made')
+                        if all(x == data_slices_sum[0][0] for x in data_slices_sum):
+                            print('Identical data in slice')       
                     logging.info(f'split clusters based on whole remaining variables {remaining_vars_scope}')
 
                 sum_node_children = []

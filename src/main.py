@@ -4,7 +4,7 @@ import logging
 from spn.structure.StatisticalTypes import MetaType
 from spn.algorithms.RSPMNnewAlgo import RSPMNnewAlgo
 from spn.io.Graphics import plot_spn
-logging.basicConfig(filename="FLNA2.log", level=logging.DEBUG)
+logging.basicConfig(filename="FLNADC2.log", level=logging.DEBUG)
 
 csv_path = "/home/ht65490/Desktop/SPFlow-H/src/spn/RSPMN_MDP_Datasets/FrozenLake/FrozenLake.csv"
 df = pd.read_csv(csv_path, sep=",", header=None)
@@ -29,9 +29,9 @@ template = rspmn.InitialTemplate.template_network
 template = rspmn.hard_em(train_data, template, False)
 
 #Plotting Learned Structure
-plot_spn(spmn_structure_two_time_steps, "/home/ht65490/Desktop/SPFlow-H/src/spn/RSPMN_Plots/FL2StepNA2.pdf", feature_labels=["State0", "Action0", "Reward0", "State1", "Action1", "Reward1"])
-plot_spn(top_network, "/home/ht65490/Desktop/SPFlow-H/src/spn/RSPMN_Plots/FLTopNA2.pdf", feature_labels=["State", "Action", "Reward"])
-plot_spn(initial_template_network, "/home/ht65490/Desktop/SPFlow-H/src/spn/RSPMN_Plots/FLTemplateNA2.pdf", feature_labels=["State", "Action", "Reward"])
+plot_spn(spmn_structure_two_time_steps, "/home/ht65490/Desktop/SPFlow-H/src/spn/RSPMN_Plots/FL2StepNADC2.pdf", feature_labels=["State0", "Action0", "Reward0", "State1", "Action1", "Reward1"])
+plot_spn(top_network, "/home/ht65490/Desktop/SPFlow-H/src/spn/RSPMN_Plots/FLTopNADC2.pdf", feature_labels=["State", "Action", "Reward"])
+plot_spn(initial_template_network, "/home/ht65490/Desktop/SPFlow-H/src/spn/RSPMN_Plots/FLTemplateNADC2.pdf", feature_labels=["State", "Action", "Reward"])
 
 #MEU
 print("MEU Calculations via value iteration")
